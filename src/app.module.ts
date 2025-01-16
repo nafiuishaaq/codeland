@@ -18,6 +18,7 @@ import { AccessTokenGuard } from './auth/guard/access-token/access-token.guard';
 import { APP_GUARD } from '@nestjs/core';
 import jwtConfig from './auth/config/jwt.config';
 import { JwtModule } from '@nestjs/jwt';
+import { AuthGuardGuard } from './auth/guard/auth-guard/auth-guard.guard';
 
 @Module({
   imports: [
@@ -50,8 +51,9 @@ import { JwtModule } from '@nestjs/jwt';
     AppService,
     {
       provide: APP_GUARD,
-      useClass: AccessTokenGuard,
+      useClass: AuthGuardGuard,
     },
+    AccessTokenGuard,
   ],
 })
 // eslint-disable-next-line prettier/prettier
