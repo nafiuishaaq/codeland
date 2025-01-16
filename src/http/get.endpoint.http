@@ -1,0 +1,7 @@
+# GET http://localhost:3002/users
+# ?name=whatever&limit=10&page=1
+
+GET http://localhost:3002/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImVtYWlsIjoibmFmaXVAZ21haWwuY29tIiwiaWF0IjoxNzM3MDE5OTExLCJleHAiOjE3MzcwMjM1MTEsImF1ZCI6ImxvY2FsaG9zdDozMDAyIiwiaXNzIjoibG9jYWxob3N0OjMwMDIifQ.Bbx92xDNraJpo8sCfpmxoxhhD_USxqsAK6W6_oodsdE
+
+GET http://localhost:3002/posts?id=1w

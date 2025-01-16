@@ -1,0 +1,49 @@
+POST http://localhost:3002/users
+Content-Type:application/json
+{
+    "firstName": "Nafiu",
+    "lastName": "Ishaq",
+    "email": "nafiu@gmail.com",
+    "password": "nafson$$ig"
+}
+
+POST http://localhost:3002/posts
+Content-Type:application/json
+{
+    "title":"The Originals",
+    "postType":"post",
+    "postStatus":"scheduled",
+    "content":"The origins of vampires, the firs family",
+    "metaOptions": {"metaValue": "{\"sidebar\": false}"} 
+}
+
+
+POST http://localhost:3002/posts
+Content-Type:application/json
+
+{
+    "title": "greatest eee",
+    "authorId": 1,
+    "postType": "series",
+    "postStatus": "published",
+    "content": "@Password123",
+    "metaOptions": {"metaValue": "{\"sidebar\": true}"}
+}
+
+// {
+//     "title": "What can I say",
+//     "postType": "story",
+//     "postStatus": "published",
+//     "content": "This isn't a mere story",
+//     "metaOptions": {"metaValue": "{\"sidebar\": false}"} 
+// }
+
+
+POST http://localhost:3002/tag
+content-Type: application/json
+{
+    "name": "Typescript",
+    "slug": "typescript",
+    "description": "scripting of type"
+}
+
