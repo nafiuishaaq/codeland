@@ -14,10 +14,16 @@ import { TagModule } from './tag/tag.module';
 import { MetaOptionsModule } from './meta-options/meta-options.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AccessTokenGuard } from './auth/guard/access-token/access-token.guard';
+import { APP_GUARD } from '@nestjs/core';
+import jwtConfig from './auth/config/jwt.config';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true, envFilePath: ['.env.development'] }),
+    ConfigModule.forFeature(jwtConfig),
+    JwtModule.registerAsync(jwtConfig.asProvider()),
     UsersModule,
     PostModule,
     TypeOrmModule.forRootAsync({
@@ -40,7 +46,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: AccessTokenGuard,
+    },
+  ],
 })
 // eslint-disable-next-line prettier/prettier
 export class AppModule {

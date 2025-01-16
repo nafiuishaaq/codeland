@@ -19,10 +19,8 @@ import { UpdateUserDto } from 'src/users/dto/updateUser.dto';
 import { UserService } from './providers/user.services';
 import { GetUserParamDto } from 'src/users/dto/userParam.dto';
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { AccessTokenGuard } from 'src/auth/guard/access-token/access-token.guard';
 
 @Controller('users')
-
 @ApiTags('users')
 export class UsersController {
   constructor(private readonly userService: UserService) {}
