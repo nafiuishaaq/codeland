@@ -19,6 +19,7 @@ export class AuthGuardGuard implements CanActivate {
     private readonly reflector: Reflector,
     private readonly accessTokenGuard: AccessTokenGuard,
   ) {}
+  
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
