@@ -2,6 +2,8 @@ import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { UserService } from 'src/users/providers/user.services';
 import { SignInDto } from './dto/signIn.dto';
 import { SignInProvider } from './providers/sign-in.provider';
+import { RefreshTokenProvider } from './providers/refresh-token.provider';
+import { RefreshTokenDto } from './dto/refresh-token.dto';
 
 @Injectable()
 export class AuthService {
@@ -9,12 +11,18 @@ export class AuthService {
     @Inject(forwardRef(() => UserService))
     private readonly userService: UserService,
 
+    private readonly refreshTokenProvider: RefreshTokenProvider,
+
     // intra dependency injection of signin provider
     private readonly signInProvider: SignInProvider,
   ) {}
 
   public async SignIn(signinDto: SignInDto) {
     return await this.signInProvider.SignIn(signinDto);
+  }
+
+  public async RefreshToken(refreshTokenDto: RefreshTokenDto) {
+    return await this.refreshTokenProvider.refreshToken(refreshTokenDto);
   }
 
   // create(createAuthDto: CreateAuthDto) {

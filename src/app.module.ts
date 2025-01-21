@@ -2,23 +2,19 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
-// import { UsersController } from './users/users.controller';
-// import { UsersController } from './users/users.controller';
-// import { PorpertiesModule } from './porperties/porperties.module';
 import { PostModule } from './post/post.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
-// import { User } from './users/entity/user.entity';
-// import { Post } from './post/post.entity';
 import { TagModule } from './tag/tag.module';
 import { MetaOptionsModule } from './meta-options/meta-options.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AccessTokenGuard } from './auth/guard/access-token/access-token.guard';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import jwtConfig from './auth/config/jwt.config';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthGuardGuard } from './auth/guard/auth-guard/auth-guard.guard';
+import { DataResponseInterceptor } from './common/interceptors/data-response/data-response.interceptor';
 
 @Module({
   imports: [
@@ -52,6 +48,10 @@ import { AuthGuardGuard } from './auth/guard/auth-guard/auth-guard.guard';
     {
       provide: APP_GUARD,
       useClass: AuthGuardGuard,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: DataResponseInterceptor,
     },
     AccessTokenGuard,
   ],

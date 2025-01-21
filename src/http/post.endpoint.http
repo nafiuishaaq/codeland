@@ -7,6 +7,15 @@ Content-Type:application/json
     "password": "nafson$$ig"
 }
 
+POST http://localhost:3002/users
+Content-Type:application/json
+{
+    "firstName": "ben",
+    "lastName": "nard",
+    "email": "bena@gmail.com",
+    "password": "nafson$$ig"
+}
+
 POST http://localhost:3002/posts
 Content-Type:application/json
 {
@@ -47,3 +56,9 @@ content-Type: application/json
     "description": "scripting of type"
 }
 
+
+POST http://localhost:3002/auth/refresh-token
+Content-Type: application/json
+{
+    "refreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImlhdCI6MTczNzM4NTU2MSwiZXhwIjoxNzQ1MTYxNTYxLCJhdWQiOiJsb2NhbGhvc3Q6MzAwMiIsImlzcyI6ImxvY2FsaG9zdDozMDAyIn0.2Jcrwz-P5tCCXjVz_IErmZc8T3vj2IVaU_t0r2VJlz8"
+}

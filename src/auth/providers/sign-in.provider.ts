@@ -45,6 +45,7 @@ export class SignInProvider {
       throw new UnauthorizedException('wrong email or password combination.');
     }
 
-    return await this.generateTokenProvider.generateTokens(user);
+    const tokens = await this.generateTokenProvider.generateTokens(user);
+    return [tokens, user];
   }
 }

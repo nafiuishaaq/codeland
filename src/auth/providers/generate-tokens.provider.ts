@@ -19,8 +19,9 @@ export class GenerateTokensProvider {
     return await this.jwtService.signAsync(
       {
         sub: userId,
-        email: payload,
+        ...payload,
       },
+
       {
         secret: this.jwtConfiguration.secret,
         audience: this.jwtConfiguration.audience,

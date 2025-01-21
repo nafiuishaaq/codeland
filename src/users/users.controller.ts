@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   DefaultValuePipe,
   Get,
@@ -11,7 +12,7 @@ import {
   Patch,
   Post,
   Query,
-  SetMetadata,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { UpdateUserDto } from 'src/users/dto/updateUser.dto';
@@ -63,6 +64,7 @@ export class UsersController {
     summary: 'creates a new user',
   })
   @Post()
+  @UseInterceptors(ClassSerializerInterceptor)
   // @SetMetadata('authType', 'none')
   @Auth(enumsTypes.None)
   public createUsers(

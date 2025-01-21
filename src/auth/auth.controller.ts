@@ -1,21 +1,31 @@
-import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  HttpCode,
+  HttpStatus,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignInDto } from './dto/signIn.dto';
+import { RefreshTokenDto } from './dto/refresh-token.dto';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('/sign-in')
+  @UseInterceptors(ClassSerializerInterceptor)
   @HttpCode(HttpStatus.OK)
   public SignIn(@Body() signInDto: SignInDto) {
     return this.authService.SignIn(signInDto);
   }
 
-  // @Get()
-  // findAll() {
-  //   return this.authService.findAll();
-  // }
+  @Post('/refresh-token')
+  public RefreshToken(@Body() refreshToken: RefreshTokenDto) {
+    return this.authService.RefreshToken(refreshToken);
+  }
 
   // @Get(':id')
   // findOne(@Param('id') id: string) {
