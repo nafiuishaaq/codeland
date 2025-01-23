@@ -10,6 +10,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../entity/user.entity';
 import { Repository } from 'typeorm';
 import { HashingProvider } from 'src/auth/providers/hashing.provider';
+import { MailProvider } from 'src/mail/providers/mail.provider';
 
 @Injectable()
 export class CreateUserProvider {
@@ -18,8 +19,11 @@ export class CreateUserProvider {
   ) {}
 
   // Inject Hashing Provider
-  @Inject(forwardRef(() => HashingProvider))
+  // @Inject(forwardRef(() => HashingProvider))
   private readonly hashingProvider: HashingProvider;
+
+  // inject mail service
+  private readonly mailService: MailProvider;
 
   public async createUsers(createUserDto: CreateUserDto) {
     // check if user already exits
@@ -58,6 +62,12 @@ export class CreateUserProvider {
           cause: 'the user is using Glo network',
         },
       );
+    }
+
+    try {
+      await this.mailService.welcomeEmail(newUser);
+    } catch (error) {
+      throw new BadRequestException('User already exist');
     }
     return newUser;
   }

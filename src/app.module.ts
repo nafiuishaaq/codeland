@@ -15,6 +15,7 @@ import jwtConfig from './auth/config/jwt.config';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthGuardGuard } from './auth/guard/auth-guard/auth-guard.guard';
 import { DataResponseInterceptor } from './common/interceptors/data-response/data-response.interceptor';
+import { MailModule } from './mail/mail.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { DataResponseInterceptor } from './common/interceptors/data-response/dat
     TagModule,
     MetaOptionsModule,
     AuthModule,
+    MailModule,
   ],
   controllers: [AppController],
   providers: [
